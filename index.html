@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دكتور عهد فرج | التداول والاستثمار والأسواق المالية</title>
+    
+    <!-- خط Cairo العربي العصري -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        luxury: {
+                            bg: '#0b0e14',
+                            ticker: '#0f131c',
+                            card: '#121620',
+                            inner: '#0d111a',
+                            goldLight: '#f3cf65',
+                            gold: '#d4af37',
+                            goldDark: '#b88924',
+                            telegram: '#229ED9',
+                        }
+                    },
+                    animation: {
+                        'ticker-scroll': 'tickerScroll 28s linear infinite',
+                        'shimmer': 'shimmer 3s infinite',
+                        'float-slow': 'floatSlow 5s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        tickerScroll: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(50%)' },
+                        },
+                        shimmer: {
+                            '0%': { transform: 'translateX(150%) skewX(-20deg)' },
+                            '100%': { transform: 'translateX(-150%) skewX(-20deg)' },
+                        },
+                        floatSlow: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* إيقاف شريط الأسعار عند التمرير بالماوس أو اللمس */
+        .ticker-wrapper:hover .ticker-track {
+            animation-play-state: paused;
+        }
+        /* تدرج ذهبي معدني فاخر */
+        .gold-text-gradient {
+            background: linear-gradient(135deg, #f7df8b 0%, #d4af37 55%, #b58622 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-btn-gradient {
+            background: linear-gradient(135deg, #f3cf65 0%, #d4af37 50%, #b88924 100%);
+        }
+        .gold-btn-gradient:hover {
+            background: linear-gradient(135deg, #f8da7d 0%, #e0bc44 50%, #c6962d 100%);
+        }
+        /* توهج ذهبي ناعم أعلى البطاقة الرئيسية */
+        .card-ambient-glow {
+            background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.14) 0%, rgba(18, 22, 32, 0.98) 48%, #121620 100%);
+        }
+    </style>
+</head>
+<body class="font-cairo bg-luxury-bg text-white min-h-screen flex flex-col justify-between overflow-x-hidden selection:bg-luxury-gold selection:text-black">
+
+    <!-- 1. شريط الأسواق المباشر العلوي (Live Market Ticker Bar) -->
+    <header class="sticky top-0 z-40 w-full bg-luxury-ticker/95 backdrop-blur-md border-b border-slate-800/80 py-2 overflow-hidden ticker-wrapper">
+        <div class="flex whitespace-nowrap w-max animate-ticker-scroll ticker-track" dir="ltr">
+            <!-- المجموعة الأولى -->
+            <div class="flex items-center gap-6 px-4 text-xs font-bold">
+                <div class="flex items-center gap-2">
+                    <span class="w-4 h-4 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-[10px]">₿</span>
+                    <span class="text-slate-200">BTC/USD</span>
+                    <span class="bg-emerald-500/15 text-emerald-400 px-2 py-0.5 rounded text-[11px] border border-emerald-500/20">▲ 3.18%+</span>
+                </div>
+                <span class="text-slate-700">|</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-sky-400">📊</span>
+                    <span class="text-slate-200">NASDAQ 100</span>
+                    <span class="bg-emerald-500/15 text-emerald-400 px-2 py-0.5 rounded text-[11px] border border-emerald-500/20">▲ 0.92%+</span>
+                </div>
+                <span class="text-slate-700">|</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-luxury-goldLight">🥇</span>
+                    <span class="text-slate-200">XAU/USD (الذهب)</span>
+                    <span class="bg-emerald-500/15 text-emerald-400 px-2 py-0.5 rounded text-[11px] border border-emerald-500/20">▲ 1.45%+</span>
+                </div>
+                <span class="text-slate-700">|</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-indigo-400">💱</span>
+                    <span class="text-slate-200">EUR/USD</span>
+                    <span class="bg-emerald-500/15 text-emerald-400 px-2 py-0.5 rounded text-[11px] border border-emerald-500/20">▲ 0.34%+</span>
+                </div>
+                <span class="text-slate-700">|</span>
+                <div class="flex items-center gap-1.5 text-slate-300 font-cairo">
+                    <span class="text-luxury-gold">🛡️</span>
+                    <span>إدارة مخاطر احترافية</span>
+                </div>
+            </div>
+
+            <!-- تكرار المجموعة لاستمرارية الحركة بسلاسة -->
+            <div class="flex items-center gap-6 px-4 text-xs font-bold" aria-hidden="true">
+                <div class="flex items-center gap-2">
+                    <span class="w-4 h-4 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-[10px]">₿</span>
+                    <span class="text-slate-200">BTC/USD</span>
+                    <span class="bg-emerald-500/15 text-emerald-400 px-2 py-0.5 rounded text-[11px] border border-emerald-500/20">▲ 3.18%+</span>
+                </div>
+                <span class="text-slate-700">|</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-sky-400">📊</span>
+                    <span class="text-slate-200">NASDAQ 100</span>
+                    <span class="bg-emerald-500/15 text-emerald-400 px-2 py-0.5 rounded text-[11px] border border-emerald-500/20">▲ 0.92%+</span>
+                </div>
+                <span class="text-slate-700">|</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-luxury-goldLight">🥇</span>
+                    <span class="text-slate-200">XAU/USD (الذهب)</span>
+                    <span class="bg-emerald-500/15 text-emerald-400 px-2 py-0.5 rounded text-[11px] border border-emerald-500/20">▲ 1.45%+</span>
+                </div>
+                <span class="text-slate-700">|</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-indigo-400">💱</span>
+                    <span class="text-slate-200">EUR/USD</span>
+                    <span class="bg-emerald-500/15 text-emerald-400 px-2 py-0.5 rounded text-[11px] border border-emerald-500/20">▲ 0.34%+</span>
+                </div>
+                <span class="text-slate-700">|</span>
+                <div class="flex items-center gap-1.5 text-slate-300 font-cairo">
+                    <span class="text-luxury-gold">🛡️</span>
+                    <span>إدارة مخاطر احترافية</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. الحاوية الرئيسية (Main Hero Card) -->
+    <main class="flex-grow flex items-center justify-center px-3.5 py-6 sm:py-10 relative">
+        <!-- إضاءة خلفية خافتة -->
+        <div class="fixed top-20 left-1/2 -translate-x-1/2 w-[340px] h-[340px] bg-luxury-gold/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="w-full max-w-[480px] card-ambient-glow border border-[#d4af37]/30 rounded-[28px] shadow-[0_25px_70px_rgba(0,0,0,0.85)] p-5 sm:p-7 text-center relative z-10">
+            
+            <!-- شارة VIP العلوية -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/35 text-xs sm:text-sm font-bold text-[#f3cf65] mb-6 shadow-inner">
+                <!-- علامة صح ذهبية -->
+                <span class="w-4 h-4 rounded-full bg-luxury-gold text-black flex items-center justify-center shrink-0">
+                    <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="3.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                </span>
+                <span>القناة الرسمية المعتمدة • VIP</span>
+                <!-- نقطة الحالة المباشرة الخضراء -->
+                <span class="relative flex h-2.5 w-2.5 mr-0.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+            </div>
+
+            <!-- شعار PRO TRADER مع شارة تليجرام المتداخلة -->
+            <div class="relative w-24 h-24 mx-auto mb-5 animate-float-slow">
+                <div class="w-full h-full rounded-[22px] bg-[#0e121b] border-2 border-[#d4af37]/60 shadow-[0_0_25px_rgba(212,175,55,0.2)] flex flex-col items-center justify-between p-3 relative overflow-hidden">
+                    <!-- سهم صعود ذهبي -->
+                    <div class="mt-1">
+                        <svg class="w-9 h-9 text-[#e5b94c]" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                            <polyline points="16 7 22 7 22 13"></polyline>
+                        </svg>
+                    </div>
+                    <!-- نص PRO TRADER -->
+                    <div class="w-full text-right leading-none" dir="ltr">
+                        <span class="block text-[9px] font-extrabold tracking-widest text-[#d4af37]/90">PRO</span>
+                        <span class="block text-[9px] font-extrabold tracking-wider text-[#d4af37]/90">TRADER</span>
+                    </div>
+                </div>
+
+                <!-- أيقونة تليجرام الدائرية المتداخلة أسفل اليسار -->
+                <div class="absolute -bottom-2 -left-2 w-10 h-10 rounded-full bg-luxury-telegram border-[3px] border-[#121620] shadow-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-white fill-current -translate-x-[1px]" viewBox="0 0 24 24">
+                        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- الاسم الرئيسي -->
+            <h1 class="text-3xl sm:text-[34px] font-black tracking-tight mb-2">
+                <span class="text-white">دكتور </span>
+                <span class="gold-text-gradient">عهد فرج</span>
+            </h1>
+
+            <!-- العنوان الفرعي الجذاب -->
+            <p class="text-sm sm:text-base font-extrabold text-white mb-3">
+                ضاعف أرباحك بذكاء • صفقات وتحليلات عالية الدقة
+            </p>
+
+            <!-- الفقرة التسويقية المقنعة -->
+            <p class="text-xs sm:text-sm text-[#9ca3af] leading-relaxed mb-5 px-1">
+                توقف عن التداول العشوائي والخسائر المتكررة! انضم مجاناً الآن إلى نخبة المتداولين مع <strong class="text-slate-200 font-bold">دكتور عهد فرج</strong>، واحصل يومياً على صفقات مدروسة بنقاط دخول وأهداف واضحة، مع خطة إدارة رأس مال تحمي محفظتك وتنمّيها بثبات.
+            </p>
+
+            <!-- شريط الندرة والتحفيز -->
+            <div class="inline-block bg-amber-500/10 border border-amber-500/25 rounded-xl px-3.5 py-1.5 mb-4">
+                <p class="text-[11px] sm:text-xs font-bold text-[#f3cf65]">
+                    🔥 المقاعد المجانية في القناة الخاصة محدودة — انضم الآن مجاناً
+                </p>
+            </div>
+
+            <!-- زر الانضمام الذهبي الرئيسي -->
+            <a href="https://t.me/+c5kKS53Wio1mM2Nk" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="group relative w-full overflow-hidden gold-btn-gradient text-[#0b0e14] font-black text-base sm:text-lg py-4 px-6 rounded-2xl shadow-[0_10px_30px_rgba(212,175,55,0.35)] flex items-center justify-center gap-3 transition-all duration-200 transform hover:-translate-y-0.5 active:scale-[0.98] mb-3.5 cursor-pointer">
+                <!-- تأثير اللمعان المتحرك -->
+                <span class="absolute inset-0 w-1/2 h-full bg-white/30 blur-md animate-shimmer pointer-events-none"></span>
+                
+                <!-- دائرة سوداء بداخلها أيقونة تليجرام ذهبية -->
+                <span class="w-8 h-8 rounded-full bg-[#0b0e14] text-[#f3cf65] flex items-center justify-center shrink-0 shadow">
+                    <svg class="w-4 h-4 fill-current -translate-x-[0.5px]" viewBox="0 0 24 24">
+                        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                    </svg>
+                </span>
+                <span>انضم إلى القناة الآن</span>
+                <span class="text-xl font-bold transition-transform duration-200 group-hover:-translate-x-1">←</span>
+            </a>
+
+            <!-- شريط الرابط وزر النسخ -->
+            <div class="w-full bg-luxury-inner border border-slate-800/90 rounded-2xl p-2.5 flex items-center justify-between gap-2 mb-7">
+                <!-- زر نسخ الرابط -->
+                <button type="button" 
+                        onclick="copyChannelLink()"
+                        class="inline-flex items-center gap-1.5 bg-[#1b1a14] hover:bg-[#272419] text-[#f3cf65] border border-[#d4af37]/35 font-bold text-xs px-3.5 py-2 rounded-xl transition-all active:scale-95 shrink-0 cursor-pointer">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span>نسخ الرابط</span>
+                </button>
+
+                <!-- نص رابط القناة -->
+                <div class="flex items-center gap-1.5 text-slate-300 text-xs font-mono truncate px-1" dir="ltr">
+                    <svg class="w-3.5 h-3.5 text-luxury-gold shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                    </svg>
+                    <span class="truncate select-all">t.me/+c5kKS53Wio1mM2Nk</span>
+                </div>
+            </div>
+
+            <!-- 3. بطاقات المميزات العمودية (Vertical Feature Cards Stack) -->
+            <div class="space-y-3.5 mb-7">
+                
+                <!-- البطاقة 1: تحليلات يومية دقيقة -->
+                <div class="bg-luxury-inner/90 hover:bg-[#141926] border border-slate-800/90 hover:border-emerald-500/35 rounded-2xl p-5 text-center transition-all duration-200">
+                    <div class="w-11 h-11 mx-auto mb-3 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="7"></circle>
+                            <line x1="12" y1="2" x2="12" y2="5"></line>
+                            <line x1="12" y1="19" x2="12" y2="22"></line>
+                            <line x1="2" y1="12" x2="5" y2="12"></line>
+                            <line x1="19" y1="12" x2="22" y2="12"></line>
+                            <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
+                        </svg>
+                    </div>
+                    <h3 class="text-white font-extrabold text-base mb-1">تحليلات يومية دقيقة</h3>
+                    <p class="text-[#9ca3af] text-xs leading-relaxed">قراءة فنية وأساسية لحظية لحركة الذهب والعملات والأسواق</p>
+                </div>
+
+                <!-- البطاقة 2: صفقات مدروسة بنسبة نجاح عالية -->
+                <div class="bg-luxury-inner/90 hover:bg-[#141926] border border-slate-800/90 hover:border-[#d4af37]/40 rounded-2xl p-5 text-center transition-all duration-200">
+                    <div class="w-11 h-11 mx-auto mb-3 rounded-xl bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#f3cf65] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.15)]">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5L2 9l10 12L22 9l-3-6zM9.62 8l1.5-3h1.76l1.5 3H9.62zM11 10v6.68L5.44 10H11zm2 0h5.56L13 16.68V10zm6.26-2h-2.65l-1.5-3h2.65l1.5 3zM6.24 5h2.65l-1.5 3H4.74l1.5-3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-white font-extrabold text-base mb-1">صفقات مدروسة بنسبة نجاح عالية</h3>
+                    <p class="text-[#9ca3af] text-xs leading-relaxed">تحديد دقيق لنقاط الدخول، جني الأرباح، ووقف الخسارة</p>
+                </div>
+
+                <!-- البطاقة 3: إدارة صارمة لرأس المال -->
+                <div class="bg-luxury-inner/90 hover:bg-[#141926] border border-slate-800/90 hover:border-[#d4af37]/40 rounded-2xl p-5 text-center transition-all duration-200">
+                    <div class="w-11 h-11 mx-auto mb-3 rounded-xl bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#f3cf65] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.15)]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-white font-extrabold text-base mb-1">إدارة صارمة لرأس المال</h3>
+                    <p class="text-[#9ca3af] text-xs leading-relaxed">استراتيجيات مجربة لحماية محفظتك ومضاعفة الأرباح بأقل مخاطرة</p>
+                </div>
+
+                <!-- البطاقة 4: متابعة مستمرة وتحديثات فورية -->
+                <div class="bg-luxury-inner/90 hover:bg-[#141926] border border-slate-800/90 hover:border-[#d4af37]/40 rounded-2xl p-5 text-center transition-all duration-200">
+                    <div class="w-11 h-11 mx-auto mb-3 rounded-xl bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#f3cf65] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.15)]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-white font-extrabold text-base mb-1">متابعة مستمرة وتحديثات فورية</h3>
+                    <p class="text-[#9ca3af] text-xs leading-relaxed">تنبيهات لحظية لإدارة الصفقات وتأمين الأرباح خطوة بخطوة</p>
+                </div>
+
+            </div>
+
+            <!-- زر دعوة سفلي مكرر لزيادة التحويل -->
+            <a href="https://t.me/+c5kKS53Wio1mM2Nk" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="w-full gold-btn-gradient text-[#0b0e14] font-black text-base py-3.5 px-6 rounded-2xl shadow-[0_8px_25px_rgba(212,175,55,0.28)] flex items-center justify-center gap-2.5 transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer">
+                <span>ابدأ رحلتك الاستثمارية معنا الآن</span>
+                <span class="text-lg font-bold">←</span>
+            </a>
+
+        </div>
+    </main>
+
+    <!-- 4. التذييل وتنويه المخاطر (Footer) -->
+    <footer class="py-5 px-4 text-center relative z-10 space-y-2">
+        <p class="text-[11px] text-[#9ca3af] max-w-md mx-auto leading-relaxed">
+            تنويه: التداول في الأسواق المالية ينطوي على مخاطر، والمحتوى المقدم في القناة لأغراض تعليمية وتحليلية.
+        </p>
+        <p class="text-xs font-bold text-slate-400">
+            © 2026 دكتور عهد فرج - جميع الحقوق محفوظة
+        </p>
+    </footer>
+
+    <!-- إشعار نسخ الرابط (Toast Notification) -->
+    <div id="copyToast" 
+         role="alert"
+         class="fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-20 opacity-0 pointer-events-none transition-all duration-300 z-50 bg-[#141926] text-[#f3cf65] border border-[#d4af37]/50 px-5 py-3 rounded-2xl shadow-2xl text-xs sm:text-sm font-extrabold flex items-center gap-2">
+        <span>تم نسخ الرابط بنجاح! ✓</span>
+    </div>
+
+    <script>
+        const TELEGRAM_LINK = "https://t.me/+c5kKS53Wio1mM2Nk";
+        let toastTimer;
+
+        function copyChannelLink() {
+            try {
+                const textArea = document.createElement("textarea");
+                textArea.value = TELEGRAM_LINK;
+                textArea.style.position = "fixed";
+                textArea.style.opacity = "0";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                const copied = document.execCommand("copy");
+                document.body.removeChild(textArea);
+
+                if (copied) {
+                    const toast = document.getElementById("copyToast");
+                    toast.classList.remove("translate-y-20", "opacity-0");
+                    toast.classList.add("translate-y-0", "opacity-100");
+
+                    clearTimeout(toastTimer);
+                    toastTimer = setTimeout(() => {
+                        toast.classList.remove("translate-y-0", "opacity-100");
+                        toast.classList.add("translate-y-20", "opacity-0");
+                    }, 2800);
+                }
+            } catch (e) {
+                console.error("Copy error:", e);
+            }
+        }
+    </script>
+</body>
+</html>
